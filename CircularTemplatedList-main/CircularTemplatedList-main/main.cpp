@@ -29,7 +29,7 @@ int getIntInput(const std::string& prompt) {
 
 // === 6. Main Program Loop ===
 int main() {
-    LinkedList myPlaylist;
+	LinkedList<Song*> myPlaylist; // Using Media* for polymorphism
     int choice = 0;
 
     std::cout << "Welcome to the Playlist Manager Starter Program (Polymorphic Edition)!" << std::endl;
@@ -45,12 +45,13 @@ int main() {
         std::cout << "2. Add a new Podcast" << std::endl;
         std::cout << "3. Display Playlist" << std::endl;
         std::cout << "4. Play Current Media Item" << std::endl;
-        std::cout << "5. Exit" << std::endl;
+        std::cout << "5. Play Next Media Item" << std::endl;
+        std::cout << "6. Exit" << std::endl;
         std::cout << "Enter your choice: ";
 
         if (!(std::cin >> choice)) {
             std::cout << "Invalid input. Exiting." << std::endl;
-            choice = 5;
+            choice = 6;
         }
 
         switch (choice) {
@@ -82,14 +83,17 @@ int main() {
                 myPlaylist.playCurrent();
                 break;
             case 5:
+				myPlaylist.playNext();
+				break;
+            case 6:
                 std::cout << "Exiting Playlist Manager..." << std::endl;
                 break;
             default:
                 std::cout << "Invalid menu choice. Please try again." << std::endl;
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
-    // The LinkedList destructor is called automatically when 'myPlaylist' goes out of scope.
+    // Destructor of LinkedList<Song*> automatically cleans up all media.
     return 0;
 }
